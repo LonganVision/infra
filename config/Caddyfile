@@ -1,0 +1,6 @@
+:443 {
+    root * /srv/static
+    file_server
+    tls /etc/caddy/certs/example.com.pem /etc/caddy/certs/example.com.key.pem
+    try_files {path} /index.html
+}

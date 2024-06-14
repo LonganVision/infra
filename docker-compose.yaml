@@ -1,0 +1,45 @@
+version: '3.9'
+
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./config/Caddyfile:/etc/caddy/Caddyfile
+      - ./config/example.com.pem:/etc/caddy/certs/example.com.pem
+      - ./config/example.com.key.pem:/etc/caddy/certs/example.com.key.pem
+      - ./config/static:/srv/static
+      - ./data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost/"]
+      interval: 30s
+      timeout: 10s
+      retries: 1
+      start_period: 10s
+    restart: always
+
+  zlmediakit:
+    image: zlmediakit/zlmediakit:master
+    container_name: zlmediakit
+    ports:
+      - "8080:80"
+      - "8443:443"
+      - "1935:1935"
+      - "8554:554"
+      - "10000:10000"
+      - "10000:10000/udp"
+      - "8000:8000/udp"
+      - "9000:9000/udp"
+    volumes:
+      - ./config/zlmediakit-config.ini:/opt/media/conf/config.ini
+      - ./config/zlmediakit-default.pem:/opt/media/bin/default.pem
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost:8443/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: always
