@@ -67,5 +67,13 @@ Open up `https://192.168.88.100:8443/webassist/?secret=123456` -> WebRTC Tests -
 
 **Note:** the url param `secret` is the one we set earlier in `zlmediakit_config.ini`
 
+## Architecture
+
+![image](https://github.com/LonganVision/infra/assets/139405574/33a276fa-6b91-4c39-b6b7-a35cf952a9e0)
+
+
+
+
+
 
 
