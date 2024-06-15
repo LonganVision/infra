@@ -8,6 +8,8 @@ At the root folder of this repo (location of `docker-compose.yaml`), run:
 
 `docker compose down` to stop all services
 
+`docker compose restart` to restart all stopped and running services
+
 `docker compose logs -f` to view all output logs, CTRL+C to exit logs view
 
 ## Environment Setup
