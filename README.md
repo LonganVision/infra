@@ -10,16 +10,25 @@
 
 ### Get Certificates for Local Area Network
 
-- `mkcert -install`
-- `mkcert 192.168.88.100 localhost 127.0.0.1 ::1`
+- Install system local CA: `mkcert -install`
+- Generate certs: `mkcert 192.168.88.100 localhost 127.0.0.1 ::1`
 
 Then `cat path-to-pem/*key.pem > config/example.com.key.pem`, `cat path-to-pem/*.pem > config/example.com.pem`
 
 And `cat config/example.com.key.pem config/example.com.pem > config/zlmediakit-default.pem`
 
-- `mkcert -CAROOT`
+### Install CA on client side 
 
-### Static Build Files for web UI (Optional)
+*client side means the machine with browsers you would like to watch live streams on*
+
+- Step 1. On the server, run `mkcert -CAROOT` to get the location of the CA files, copy them to your client-side machine
+- Step 2. On the client-side machine
+  - 2.1 Install `mkcert`
+  - 2.2 Replace the CA files under `$(mkcert -CAROOT)` with the ones we just copied in Step 1
+  - 2.3 Run `mkcert -install` to install CAs in the system
+  - 2.4 Open a browser (Use Chrome) and visit `https://<server-ip>`, there should be no more warnings 
+
+###  Static Build Files for web UI (Optional)
 
 Put all static resources under `config/static`
 
@@ -39,7 +48,9 @@ Put all static resources under `config/static`
 ## Quick Start
 
 `docker compose up -d` to start the services
+
 `docker compose down` to stop all services
+
 `docker compose logs -f` to view all output logs
 
 ## Push RTMP Streams
