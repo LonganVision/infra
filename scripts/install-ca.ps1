@@ -18,8 +18,8 @@
 
 #>
 param(
-  [string] $Server = "192.168.188.100"
-  [string] $User = "lv"
+  [string] $Server = "192.168.188.100",
+  [string] $User = "lv",
   [string] $Hostname = "live.longanvision.com"
 )
 
@@ -73,4 +73,4 @@ if (-not (Select-String -Path $hostsPath -Pattern "^\s*${Server}\s+${Hostname}(\
   Add-Content -Path $hostsPath -Value $entry
 }
 
-Write-Host "All done! You can now visit https://$Hostname."
+Write-Host "All done! You can now visit https://$Hostname"
