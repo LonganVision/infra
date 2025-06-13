@@ -55,7 +55,7 @@ if (Test-Path $caroot) {
 $remotePath = "${User}@${Server}:/home/$User/.local/share/mkcert/*"
 Write-Host "Fetching CA files from $remotePath..." -ForegroundColor Cyan
 # scp will prompt for password or use existing key
-& scp -q $remotePath "$caroot\"
+& scp -q $remotePath "$caroot"
 if ($LASTEXITCODE -ne 0) {
   Write-Error "scp failed (exit $LASTEXITCODE). Make sure OpenSSH client is enabled and server is reachable."
   exit 1
